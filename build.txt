@@ -1,0 +1,3 @@
+displayName = Talisman of Friendship
+author = stormytuna
+version = 0.1

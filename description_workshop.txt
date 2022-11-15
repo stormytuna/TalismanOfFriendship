@@ -1,4 +1,4 @@
-Talisman of Friendship is a tiny mod that just adds two items
+﻿Talisman of Friendship is a tiny mod that just adds two items
 
 Talisman of Friendship
 - Allows you to place pets into it 

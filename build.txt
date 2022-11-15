@@ -1,3 +1,4 @@
 displayName = Talisman of Friendship
 author = stormytuna
-version = 0.1
+homepage = https://github.com/stormytuna/TalismanOfFriendship
+version = 1.0.0

@@ -13,3 +13,15 @@ Talisman of Luminance
 - Crafted with 5 rubies and 1 chain at a table and chair
 
 To report any bugs or give feedback, you can post a comment on the Steam Workshop or message me on Discord (stormytuna#2688). You can report bugs using GitHub issues as well.
+
+[b]Changelog[/b]
+[list]
+[*][i]v1.0.1[/i]
+[list]
+[*]Fixed Talisman of Luminance not working properly
+[/list]
+[*][i]v1.0.0[/i]
+[list]
+[*]Released
+[/list]
+[/list]

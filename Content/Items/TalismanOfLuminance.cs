@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -29,11 +28,19 @@ namespace TalismanOfFriendship.Content.Items {
                     .Register();
         }
 
-        private List<Item> _pets = new();
-        public List<Item> Pets => _pets;
+        private List<Item> _pets;
+        public List<Item> Pets {
+            get {
+                _pets ??= new();
+                return _pets;
+            }
+            set {
+                _pets = value;
+            }
+        }
 
         public override void UpdateAccessory(Player player, bool hideVisual) {
-            foreach (var pet in _pets) {
+            foreach (var pet in Pets) {
                 player.AddBuff(pet.buffType, 10);
             }
         }
@@ -43,14 +50,13 @@ namespace TalismanOfFriendship.Content.Items {
         public override void RightClick(Player player) {
             if (player.whoAmI == Main.myPlayer) {
                 if (Main.mouseItem.type == ItemID.None) {
-                    foreach (var pet in _pets) {
+                    foreach (var pet in Pets) {
                         player.QuickSpawnItem(Item.GetSource_OpenItem(pet.type), pet.type);
                     }
-                    _pets = new();
-                }
-                else if (Main.lightPet[Main.mouseItem.buffType]) {
-                    if (_pets.Find(i => i.type == Main.mouseItem.type) == null) {
-                        _pets.Add(new(Main.mouseItem.type));
+                    Pets = new();
+                } else if (Main.lightPet[Main.mouseItem.buffType]) {
+                    if (Pets.Find(i => i.type == Main.mouseItem.type) == null) {
+                        Pets.Add(new(Main.mouseItem.type));
                         Main.mouseItem.stack--;
                     }
                 }
@@ -61,25 +67,18 @@ namespace TalismanOfFriendship.Content.Items {
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
             int index = tooltips.FindIndex(tip => tip.Text == "This is a temporary tooltip") + 1;
             tooltips[index - 1].Text = "";
-            foreach (var pet in _pets) {
+            foreach (var pet in Pets) {
                 tooltips.Insert(index, new(Mod, $"Pet{index}", $"[i:{pet.type}] {pet.Name}"));
                 index++;
             }
         }
 
         public override void SaveData(TagCompound tag) {
-            List<int> types = new();
-            foreach (var pet in _pets) {
-                types.Add(pet.type);
-            }
-            tag["petTypes"] = types;
+            tag["pets"] = Pets;
         }
 
         public override void LoadData(TagCompound tag) {
-            List<int> types = tag.GetList<int>("petNames").ToList();
-            foreach (var type in types) {
-                _pets.Add(new Item(type));
-            }
+            Pets = tag.Get<List<Item>>("pets");
         }
     }
 
@@ -103,7 +102,7 @@ namespace TalismanOfFriendship.Content.Items {
         }
 
         private void Player_AddBuff_RemoveOldPetBuffsOfMatchingType(On.Terraria.Player.orig_AddBuff_RemoveOldPetBuffsOfMatchingType orig, Player self, int type) {
-            if (self.miscEquips[0].type == ModContent.ItemType<TalismanOfLuminance>()) {
+            if (self.miscEquips[1].type == ModContent.ItemType<TalismanOfLuminance>()) {
                 return;
             }
 

@@ -46,7 +46,7 @@ namespace TalismanOfFriendship.Content.Items {
             }
         }
 
-        public override bool CanRightClick() => Main.keyState.IsKeyDown(Keys.LeftShift) || Main.lightPet[Main.mouseItem.buffType];
+        public override bool CanRightClick() => Main.keyState.IsKeyDown(Keys.LeftShift) || (Main.vanityPet[Main.mouseItem.buffType] && Main.mouseItem.type != ItemID.None);
 
         public override void RightClick(Player player) {
             if (player.whoAmI == Main.myPlayer) {
@@ -55,7 +55,7 @@ namespace TalismanOfFriendship.Content.Items {
                         player.QuickSpawnItem(Item.GetSource_OpenItem(pet.type), pet.type);
                     }
                     Pets = new();
-                } else if (Main.vanityPet[Main.mouseItem.buffType]) {
+                } else if (Main.vanityPet[Main.mouseItem.buffType] && Main.mouseItem.type != ItemID.None) {
                     if (Pets.Find(i => i.type == Main.mouseItem.type) == null) {
                         Pets.Add(new(Main.mouseItem.type));
                         Main.mouseItem.stack--;

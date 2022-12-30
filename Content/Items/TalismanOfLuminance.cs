@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -7,7 +8,7 @@ using Terraria.ModLoader.IO;
 namespace TalismanOfFriendship.Content.Items {
     public class TalismanOfLuminance : ModItem {
         public override void SetStaticDefaults() {
-            Tooltip.SetDefault("Stores your light pets for safekeeping\nRight click with a light pet in your cursor to drop it in\nRight click to release all contained light pets\nEquip to summon your horde!\nThis is a temporary tooltip");
+            Tooltip.SetDefault("Stores your light pets for safekeeping\nRight click with a light pet in your cursor to drop it in\nShift right click to release all contained light pets\nEquip to summon your horde!\nThis is a temporary tooltip");
         }
 
         public override void SetDefaults() {
@@ -45,11 +46,11 @@ namespace TalismanOfFriendship.Content.Items {
             }
         }
 
-        public override bool CanRightClick() => true;
+        public override bool CanRightClick() => Main.keyState.IsKeyDown(Keys.LeftShift) || Main.lightPet[Main.mouseItem.buffType];
 
         public override void RightClick(Player player) {
             if (player.whoAmI == Main.myPlayer) {
-                if (Main.mouseItem.type == ItemID.None) {
+                if (Main.mouseItem.type == ItemID.None && Main.keyState.IsKeyDown(Keys.LeftShift)) {
                     foreach (var pet in Pets) {
                         player.QuickSpawnItem(Item.GetSource_OpenItem(pet.type), pet.type);
                     }

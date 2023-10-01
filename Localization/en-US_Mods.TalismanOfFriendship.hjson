@@ -1,0 +1,40 @@
+Buffs: {
+	TotallyALightPetBuff: {
+		DisplayName: Totally A Light Pet Buff
+		Description: Mods.TalismanOfFriendship.Buffs.TotallyALightPetBuff.Description
+	}
+
+	TotallyAPetBuff: {
+		DisplayName: Totally A Pet Buff
+		Description: Mods.TalismanOfFriendship.Buffs.TotallyAPetBuff.Description
+	}
+}
+
+Items: {
+	TalismanOfFriendship: {
+		DisplayName: Talisman Of Friendship
+		Tooltip:
+			'''
+			Stores your pets for safekeeping
+			Right click with a pet in your cursor to drop it in
+			Shift right click to release all contained pets
+			Equip to summon your horde!
+			'''
+	}
+
+	TalismanOfLuminance: {
+		DisplayName: Talisman Of Luminance
+		Tooltip:
+			'''
+			Stores your light pets for safekeeping
+			Right click with a light pet in your cursor to drop it in
+			Shift right click to release all contained light pets
+			Equip to summon your horde!
+			'''
+	}
+}
+
+Projectiles: {
+	TotallyALightPetProjectile.DisplayName: Totally A Light Pet Projectile
+	TotallyAPetProjectile.DisplayName: Totally A Pet Projectile
+}
